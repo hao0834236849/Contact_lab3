@@ -1,71 +1,89 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import FontAwesome from "react-native-vector-icons/FontAwesome6";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-interface DialpadProps {
+interface NumericKeypadProps {
   onPressNumber: (number: string) => void;
   onDelete: () => void;
 }
 
-const Dialpad: React.FC<DialpadProps> = ({ onPressNumber, onDelete }) => {
-  const buttons = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"];
+const NumericKeypad: React.FC<NumericKeypadProps> = ({
+  onPressNumber,
+  onDelete,
+}) => {
+  const [pressedButton, setPressedButton] = useState<string | null>(null);
+
+  const handlePressIn = (number: string) => {
+    setPressedButton(number);
+  };
+
+  const handlePressOut = () => {
+    setPressedButton(null);
+  };
+
+  const renderButton = (title: string, onPress: () => void) => (
+    <TouchableOpacity
+      style={[styles.button, { opacity: pressedButton === title ? 0.7 : 1 }]}
+      onPressIn={() => handlePressIn(title)}
+      onPressOut={handlePressOut}
+      onPress={onPress}
+    >
+      <Text style={styles.buttonText}>{title}</Text>
+    </TouchableOpacity>
+  );
 
   return (
-    <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        {buttons.map((button) => (
-          <TouchableOpacity
-            key={button}
-            style={styles.button}
-            onPress={() => onPressNumber(button)}
-          >
-            <Text style={styles.buttonText}>{button}</Text>
-          </TouchableOpacity>
-        ))}
+    <View style={styles.keypadContainer}>
+      <View style={styles.row}>
+        {["1", "2", "3"].map((num) =>
+          renderButton(num, () => onPressNumber(num))
+        )}
       </View>
-      <TouchableOpacity style={styles.deleteButton} onPress={onDelete}>
-        <FontAwesome name="delete-left" size={24} color="white" />
-      </TouchableOpacity>
+      <View style={styles.row}>
+        {["4", "5", "6"].map((num) =>
+          renderButton(num, () => onPressNumber(num))
+        )}
+      </View>
+      <View style={styles.row}>
+        {["7", "8", "9"].map((num) =>
+          renderButton(num, () => onPressNumber(num))
+        )}
+      </View>
+      <View style={styles.row}>
+        {renderButton("Del", onDelete)}
+        {renderButton("0", () => onPressNumber("0"))}
+        {renderButton("+", () => onPressNumber("+"))}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
+  keypadContainer: {
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
-    padding: 10,
+    marginVertical: 10,
   },
-  buttonContainer: {
+  row: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    width: 300, // Set a fixed width to avoid overflow
-    justifyContent: "space-between",
+    justifyContent: "space-around",
+    width: "100%",
     marginBottom: 10,
   },
   button: {
-    width: "30%", // Adjusted width for better alignment
-    padding: 20,
+    backgroundColor: "#f5f5f5",
+    borderRadius: 30,
+    padding: 15,
+    margin: 5,
+    width: 115,
     alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 5,
-    backgroundColor: "#f8f8f8",
     borderWidth: 1,
     borderColor: "#ddd",
-    marginBottom: 10,
   },
   buttonText: {
-    fontSize: 24,
-    color: "#333",
-  },
-  deleteButton: {
-    width: "25%",
-    padding: 15,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#000000",
-    borderRadius: 5,
+    color: "#000",
+    fontSize: 20,
   },
 });
 
-export default Dialpad;
+export default NumericKeypad;
