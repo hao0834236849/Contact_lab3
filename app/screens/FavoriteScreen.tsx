@@ -16,18 +16,20 @@ interface Favorite {
 }
 
 const FavoriteScreen: React.FC = () => {
-  // State for favorite contacts
+
   const [favorites, setFavorites] = useState<Favorite[]>([
-    { number: "0123456789", name: "John Doe" },
-    { number: "0987654321", name: "Jane Smith" },
+    { number: "0123456789", name: "Wayne Rooney" },
+    { number: "0987654321", name: "David De Gea" },
+    { number: "0222222222", name: "Kobbie Mainoo" },
+    { number: "0333333333", name: "Smith Rowe" },
   ]);
 
-  // State to store new favorite contact
+
   const [newFavoriteNumber, setNewFavoriteNumber] = useState("");
   const [newFavoriteName, setNewFavoriteName] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Function to add a favorite contact
+
   const handleAddFavorite = () => {
     if (newFavoriteNumber.trim() && newFavoriteName.trim()) {
       if (!favorites.some((fav) => fav.number === newFavoriteNumber)) {
@@ -48,12 +50,11 @@ const FavoriteScreen: React.FC = () => {
     }
   };
 
-  // Function to delete a favorite contact
   const handleDeleteFavorite = (number: string) => {
     setFavorites(favorites.filter((fav) => fav.number !== number));
   };
 
-  // Filter favorites based on search query
+
   const filteredFavorites = favorites.filter((fav) =>
     fav.name.toLowerCase().includes(searchQuery.toLowerCase())
   );

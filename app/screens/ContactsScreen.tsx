@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Alert,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList, Contact } from "../types"; // Adjust import path as needed
@@ -26,15 +27,24 @@ const ContactsScreen: React.FC<Props> = ({ navigation }) => {
   const [contacts, setContacts] = useState<Contact[]>([
     {
       id: "1",
-      name: "Nguyen Van A",
+      name: "Nguyen Van Ornn",
       phone: "0123456789",
       email: "example@example.com",
+      avatar: "https://c4.wallpaperflare.com/wallpaper/47/627/787/elderwood-ornn-league-of-legends-league-of-legends-riot-games-goat-hd-wallpaper-preview.jpg",
     },
     {
       id: "2",
-      name: "Tran Thi B",
+      name: "Tran Thi Ahri",
       phone: "0987654321",
       email: "example@example.com",
+      avatar: "https://c4.wallpaperflare.com/wallpaper/50/914/446/spirit-blossom-ahri-league-of-legends-ahri-league-of-legends-riot-games-hd-wallpaper-preview.jpg",
+    },
+    {
+      id: "3",
+      name: "Le Tran Van Yone",
+      phone: "0987654321",
+      email: "example@example.com",
+      avatar: "https://c4.wallpaperflare.com/wallpaper/34/608/886/yone-league-of-legends-league-of-legends-riot-games-spirit-blossom-hd-wallpaper-preview.jpg",
     },
   ]);
 
@@ -48,6 +58,7 @@ const ContactsScreen: React.FC<Props> = ({ navigation }) => {
         name: newName,
         phone: newPhone,
         email: "",
+        avatar: "https://randomuser.me/api/portraits/lego/1.jpg",
       };
       setContacts((prevContacts) => {
         // Add new contact and sort alphabetically
@@ -83,12 +94,16 @@ const ContactsScreen: React.FC<Props> = ({ navigation }) => {
             }
           >
             <View style={styles.contactItemContainer}>
-              <Text style={styles.contactItemName}>{item.name}</Text>
-              <Text style={styles.contactItemPhone}>{item.phone}</Text>
+              {/* Display avatar */}
+              <Image source={{ uri: item.avatar }} style={styles.avatar} />
+              <View>
+                <Text style={styles.contactItemName}>{item.name}</Text>
+                <Text style={styles.contactItemPhone}>{item.phone}</Text>
+              </View>
             </View>
           </TouchableOpacity>
         )}
-        ItemSeparatorComponent={() => <View style={styles.separator} />} // Add separator between items
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
       {/* Add contact input and button */}
       <View style={styles.addContactContainer}>
@@ -125,6 +140,8 @@ const styles = StyleSheet.create({
     textAlign: "center", // Center the title
   },
   contactItemContainer: {
+    flexDirection: "row",
+    alignItems: "center",
     padding: 15,
     backgroundColor: "#fff",
     borderRadius: 5,
@@ -158,6 +175,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 15,
   },
 });
 
