@@ -30,12 +30,12 @@ const { width, height } = Dimensions.get("window");
 const CallScreen: React.FC = () => {
   const [calls, setCalls] = useState<Call[]>([
     { id: "1", number: "0987654321", type: "incoming" },
-    { id: "2", number: "0123456789", type: "outgoing" },
-    { id: "3", number: "0345678901", type: "missed" },
-    { id: "4", number: "0567890123", type: "incoming" },
-    { id: "5", number: "0789012345", type: "outgoing" },
+    { id: "2", number: "0567890123", type: "incoming" },
+    { id: "3", number: "0123456789", type: "incoming" },
+    { id: "4", number: "0123456789", type: "outgoing" },
+    { id: "5", number: "0345678901", type: "missed" },
     { id: "6", number: "0901234567", type: "missed" },
-    { id: "7", number: "0123456789", type: "incoming" },
+    { id: "7", number: "0789012345", type: "outgoing" },
     { id: "8", number: "0234567890", type: "outgoing" },
   ]);
 

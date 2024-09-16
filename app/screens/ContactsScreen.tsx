@@ -11,7 +11,7 @@ import {
   Image,
 } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList, Contact } from "../types"; // Adjust import path as needed
+import { RootStackParamList, Contact } from "../types";
 
 type ContactsScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -45,6 +45,20 @@ const ContactsScreen: React.FC<Props> = ({ navigation }) => {
       phone: "0987654321",
       email: "example@example.com",
       avatar: "https://c4.wallpaperflare.com/wallpaper/34/608/886/yone-league-of-legends-league-of-legends-riot-games-spirit-blossom-hd-wallpaper-preview.jpg",
+    },
+    {
+      id: "4",
+      name: "HeHeHe",
+      phone: "0654789321",
+      email: "example@example.com",
+      avatar: "https://cdn.tgdd.vn/Products/Images/2282/83640/bhx/6-lon-bia-heineken-330ml-201904241647511710.jpg",
+    },
+    {
+      id: "5",
+      name: "333",
+      phone: "0753951862",
+      email: "example@example.com",
+      avatar: "https://cdn.tgdd.vn/Products/Images/2282/195211/bhx/6-lon-bia-333-330ml-202103162311002405.jpg",
     },
   ]);
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { ContactDetailScreenRouteProp } from "../types"; // Adjust import path as needed
+import { ContactDetailScreenRouteProp } from "../types";
 
 interface Props {
   route: ContactDetailScreenRouteProp;
